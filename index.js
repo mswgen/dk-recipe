@@ -751,8 +751,8 @@ ${interaction.data.options[0].value}`;
         let m = await client.channels.cache.get(interaction.channel_id).send(embed);
         embed.setTitle('Pong!')
         .setColor("RANDOM")
-        .addField('Latency', `${m.createdAt - new Date((parseInt(interaction.id) / 4194304 + 1420070400000))}`)
-        .addField('API Latency', client.ws.ping)
+        .addField('Latency', `${m.createdAt - new Date((parseInt(interaction.id) / 4194304 + 1420070400000))}ms`)
+        .addField('API Latency', `${client.ws.ping}ms`)
         .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
         .setTimestamp()
         m.edit(embed);
