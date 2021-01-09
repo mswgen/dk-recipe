@@ -33,7 +33,8 @@ client.on('message', async message => {
                 oneTimeSword: 0,
                 arrow: 0,
                 twoHandsSword: 0,
-                oneHandSword: 0
+                oneHandSword: 0,
+                nickChange: 0
             }
         });
     }
