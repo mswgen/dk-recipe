@@ -33,11 +33,11 @@ client.on('message', async message => {
     }
     if (message.channel.id == '796291747860840468') {
         await db.updateOne({_id: message.author.id}, {
-            $inc: {chats: {mine: +1}}
+            $set: {chats: {mine: (await db.findOne({_id: message.author.id})).chats.mine + 1}}
         });
     } else if (message.channel.id == '796293274016153640') {
         await db.updateOne({_id: message.author.id}, {
-            $inc: {chats: {hill: +1}}
+            $set: {chats: {hill: (await db.findOne({_id: message.author.id})).chats.hill + 1}}
         });
     }
 });
