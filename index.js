@@ -520,6 +520,7 @@ client.on('raw', async rawData => {
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
+                .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(`도<@724561925341446217>`, {
@@ -556,6 +557,7 @@ client.on('raw', async rawData => {
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
+                .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(`도<@724561925341446217>`, {
@@ -592,6 +594,7 @@ client.on('raw', async rawData => {
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
+                .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(`도<@724561925341446217>`, {
@@ -628,6 +631,7 @@ client.on('raw', async rawData => {
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
+                .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(`도<@724561925341446217>`, {
@@ -664,6 +668,7 @@ client.on('raw', async rawData => {
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
+                .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(`도<@724561925341446217>`, {
