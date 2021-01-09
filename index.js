@@ -705,7 +705,7 @@ ${interaction.data.options[0].value}`;
         const embed = new Discord.MessageEmbed()
             .setTitle(`Evaling...`)
             .setColor(0xffff00)
-            .addField('Input', '```js\n' + interactiob.data.options[0].value + '\n```')
+            .addField('Input', '```js\n' + interaction.data.options[0].value + '\n```')
             .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
             .setTimestamp()
         let m = await message.channel.send(embed);
