@@ -15,9 +15,9 @@ client.on('ready', () => {
     })
 });
 client.on('message', async message => {
-    if (!(await db.findOne({_id: message.author.id}))) {
+    if (!(await db.findOne({_id: interaction.member.user.id}))) {
         await db.insertOne({
-            _id: message.author.id,
+            _id: interaction.member.user.id,
             chats: {
                 mine: 0,
                 hill: 0
@@ -38,20 +38,20 @@ client.on('message', async message => {
         });
     }
     if (message.channel.id == '796291747860840468') {
-        await db.updateOne({_id: message.author.id}, {
+        await db.updateOne({_id: interaction.member.user.id}, {
             $set: {
                 chats: {
-                    hill: (await db.findOne({_id: message.author.id})).chats.hill,
-                    mine: (await db.findOne({_id: message.author.id})).chats.mine + 1
+                    hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill,
+                    mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine + 1
                 }
             }
         });
     } else if (message.channel.id == '796293274016153640') {
-        await db.updateOne({_id: message.author.id}, {
+        await db.updateOne({_id: interaction.member.user.id}, {
             $set: {
                 chats: {
-                    hill: (await db.findOne({_id: message.author.id})).chats.hill + 1,
-                    mine: (await db.findOne({_id: message.author.id})).chats.mine
+                    hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill + 1,
+                    mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine
                 }
             }
         });
@@ -89,18 +89,18 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             chats: {
-                                hill: (await db.findOne({_id: message.author.id})).chats.hill,
-                                mine: (await db.findOne({_id: message.author.id})).chats.mine - 350
+                                hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill,
+                                mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine - 350
                             },
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold + 1,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold + 1,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             }
                         }
                     });
@@ -122,18 +122,18 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             chats: {
-                                hill: (await db.findOne({_id: message.author.id})).chats.hill,
-                                mine: (await db.findOne({_id: message.author.id})).chats.mine - 200
+                                hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill,
+                                mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine - 200
                             },
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron + 1,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron + 1,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             }
                         }
                     });
@@ -155,18 +155,18 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             chats: {
-                                hill: (await db.findOne({_id: message.author.id})).chats.hill - 70,
-                                mine: (await db.findOne({_id: message.author.id})).chats.mine
+                                hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill - 70,
+                                mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine
                             },
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood + 1,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood + 1,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             }
                         }
                     });
@@ -188,18 +188,18 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             chats: {
-                                hill: (await db.findOne({_id: message.author.id})).chats.hill - 100,
-                                mine: (await db.findOne({_id: message.author.id})).chats.mine
+                                hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill - 100,
+                                mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine
                             },
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread + 1,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread + 1,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             }
                         }
                     });
@@ -221,18 +221,18 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             chats: {
-                                hill: (await db.findOne({_id: message.author.id})).chats.hill - 120,
-                                mine: (await db.findOne({_id: message.author.id})).chats.mine
+                                hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill - 120,
+                                mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine
                             },
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather + 1
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather + 1
                             }
                         }
                     });
@@ -256,21 +256,21 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron - 1,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood - 2,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron - 1,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood - 2,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             },
                             items: {
-                                oneTimeSword: (await db.findOne({_id: message.author.id})).items.oneTimeSword + 1,
-                                arrow: (await db.findOne({_id: message.author.id})).items.arrow,
-                                twoHandsSword: (await db.findOne({_id: message.author.id})).items.twoHandsSword,
-                                oneHandSword: (await db.findOne({_id: message.author.id})).items.oneHandSword,
-                                nickChange: (await db.findOne({_id: message.author.id})).items.nickChange
+                                oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword + 1,
+                                arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                                twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                                oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                                nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
                             }
                         }
                     });
@@ -292,21 +292,21 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron - 1,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood - 4,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread - 2,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather - 2
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron - 1,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood - 4,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread - 2,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather - 2
                             },
                             items: {
-                                oneTimeSword: (await db.findOne({_id: message.author.id})).items.oneTimeSword,
-                                arrow: (await db.findOne({_id: message.author.id})).items.arrow + 1,
-                                twoHandsSword: (await db.findOne({_id: message.author.id})).items.twoHandsSword,
-                                oneHandSword: (await db.findOne({_id: message.author.id})).items.oneHandSword,
-                                nickChange: (await db.findOne({_id: message.author.id})).items.nickChange
+                                oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                                arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow + 1,
+                                twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                                oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                                nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
                             }
                         }
                     });
@@ -328,21 +328,21 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron - 3,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood - 5,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron - 3,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood - 5,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             },
                             items: {
-                                oneTimeSword: (await db.findOne({_id: message.author.id})).items.oneTimeSword,
-                                arrow: (await db.findOne({_id: message.author.id})).items.arrow,
-                                twoHandsSword: (await db.findOne({_id: message.author.id})).items.twoHandsSword + 1,
-                                oneHandSword: (await db.findOne({_id: message.author.id})).items.oneHandSword,
-                                nickChange: (await db.findOne({_id: message.author.id})).items.nickChange
+                                oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                                arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                                twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword + 1,
+                                oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                                nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
                             }
                         }
                     });
@@ -364,21 +364,21 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold - 2,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron - 3,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood - 2,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold - 2,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron - 3,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood - 2,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             },
                             items: {
-                                oneTimeSword: (await db.findOne({_id: message.author.id})).items.oneTimeSword,
-                                arrow: (await db.findOne({_id: message.author.id})).items.arrow,
-                                twoHandsSword: (await db.findOne({_id: message.author.id})).items.twoHandsSword,
-                                oneHandSword: (await db.findOne({_id: message.author.id})).items.oneHandSword + 1,
-                                nickChange: (await db.findOne({_id: message.author.id})).items.nickChange
+                                oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                                arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                                twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                                oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword + 1,
+                                nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
                             }
                         }
                     });
@@ -400,21 +400,21 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 } else {
-                    await db.updateOne({_id: message.author.id}, {
+                    await db.updateOne({_id: interaction.member.user.id}, {
                         $set: {
                             materials: {
-                                gold: (await db.findOne({_id: message.author.id})).materials.gold,
-                                iron: (await db.findOne({_id: message.author.id})).materials.iron,
-                                wood: (await db.findOne({_id: message.author.id})).materials.wood - 5,
-                                thread: (await db.findOne({_id: message.author.id})).materials.thread,
-                                feather: (await db.findOne({_id: message.author.id})).materials.feather
+                                gold: (await db.findOne({_id: interaction.member.user.id})).materials.gold,
+                                iron: (await db.findOne({_id: interaction.member.user.id})).materials.iron,
+                                wood: (await db.findOne({_id: interaction.member.user.id})).materials.wood - 5,
+                                thread: (await db.findOne({_id: interaction.member.user.id})).materials.thread,
+                                feather: (await db.findOne({_id: interaction.member.user.id})).materials.feather
                             },
                             items: {
-                                oneTimeSword: (await db.findOne({_id: message.author.id})).items.oneTimeSword,
-                                arrow: (await db.findOne({_id: message.author.id})).items.arrow,
-                                twoHandsSword: (await db.findOne({_id: message.author.id})).items.twoHandsSword,
-                                oneHandSword: (await db.findOne({_id: message.author.id})).items.oneHandSword,
-                                nickChange: (await db.findOne({_id: message.author.id})).items.nickChange + 1
+                                oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                                arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                                twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                                oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                                nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange + 1
                             }
                         }
                     });
