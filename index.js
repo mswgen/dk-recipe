@@ -499,7 +499,6 @@ client.on('raw', async rawData => {
                 }
             }
         }
-        client.channels.cache.get(interaction.channel_id).stopTyping(true);
     } else if (interaction.data.name == 'use') {
         if (interaction.data.options[0].value == 'oneTimeSword') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword < 1) {
@@ -687,7 +686,6 @@ client.on('raw', async rawData => {
                 client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
         }
-        client.channels.cache.get(interaction.channel_id).stopTyping(true);
     } else if (interaction.data.name == 'eval') {
         if (interaction.member.user.id != '647736678815105037') return client.channels.cache.get(interaction.channel_id).send(`${client.user.username} 개발자만 사용할 수 있어요.`);
         const code = `
@@ -757,5 +755,6 @@ ${interaction.data.options[0].value}`;
         .setTimestamp()
         m.edit(embed);
     }
+    client.channels.cache.get(interaction.channel_id).stopTyping(true);
 });
 client.login(process.env.TOKEN);
