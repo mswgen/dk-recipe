@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const axios = require('axios').default;
 const http = require('http');
+const util = require('util');
 const dotenv = require('dotenv');
 dotenv.config();
 const MongoDB = require('mongodb');
@@ -574,7 +575,7 @@ client.on('raw', async rawData => {
                 m.edit(embed);
                 client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
-        }if (interaction.data.options[0].value == 'twoHandsSword') {
+        } if (interaction.data.options[0].value == 'twoHandsSword') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword < 1) {
                 const embed = new Discord.MessageEmbed()
                 .setTitle('이런, 아이템이 부족해요.')
@@ -611,7 +612,7 @@ client.on('raw', async rawData => {
                 m.edit(embed);
                 client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
-        }if (interaction.data.options[0].value == 'oneHandSword') {
+        } if (interaction.data.options[0].value == 'oneHandSword') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.oneHandSword < 1) {
                 const embed = new Discord.MessageEmbed()
                 .setTitle('이런, 아이템이 부족해요.')
@@ -648,7 +649,7 @@ client.on('raw', async rawData => {
                 m.edit(embed);
                 client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
-        }if (interaction.data.options[0].value == 'nickChange') {
+        } if (interaction.data.options[0].value == 'nickChange') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.nickChange < 1) {
                 const embed = new Discord.MessageEmbed()
                 .setTitle('이런, 아이템이 부족해요.')
@@ -687,6 +688,74 @@ client.on('raw', async rawData => {
             }
         }
         client.channels.cache.get(interaction.channel_id).stopTyping(true);
+    } else if (interaction.data.name == 'eval') {
+        if (interaction.member.user.id != '647736678815105037') return client.channels.cache.get(interaction.channel_id).send(`${client.user.username} 개발자만 사용할 수 있어요.`);
+        const code = `
+const Discord = require('discord.js');
+const fs = require('fs');
+const util = require('util');
+const axios = require('axios').default;
+const os = require('os');
+const dotenv = require('dotenv');
+const http = require('http');
+const qs = require('querystring');
+const url = require('url');
+
+${interaction.data.options[0].value}`;
+        const embed = new Discord.MessageEmbed()
+            .setTitle(`Evaling...`)
+            .setColor(0xffff00)
+            .addField('Input', '```js\n' + interactiob.data.options[0].value + '\n```')
+            .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+            .setTimestamp()
+        let m = await message.channel.send(embed);
+        try {
+            let output = eval(code);
+            let type = typeof output;
+            if (typeof output !== "string") {
+                output = util.inspect(output);
+            }
+            if (output.length >= 1020) {
+                output = `${output.substr(0, 1010)}...`;
+            }
+            output = output.replace(new RegExp(process.env.TOKEN, 'gi'), 'Secret');
+            const embed2 = new Discord.MessageEmbed()
+                .setTitle('Eval result')
+                .setColor(0x00ffff)
+                .addField('Input', '```js\n' + interaction.data.options[0].value + '\n```')
+                .addField('Output', '```js\n' + output + '\n```')
+                .addField('Type', '```js\n' + type + '\n```')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+            m.edit({
+                embed: embed2
+            });
+        } catch (err) {
+            const embed3 = new Discord.MessageEmbed()
+                .setTitle('Eval error...')
+                .setColor(0xff0000)
+                .addField('Input', '```js\n' + interaction.data.options[0].value + '\n```')
+                .addField('Error', '```js\n' + err + '\n```')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+            m.edit({
+                embed: embed3
+            });
+        }
+    } else if (interaction.data.name == 'ping') {
+        const embed = new Discord.MessageEmbed()
+        .setTitle('Pinging...')
+        .setColor('RANDOM')
+        .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+        .setTimestamp()
+        let m = await client.channels.cache.get(interaction.channel_id).send(embed);
+        embed.setTitle('Pong!')
+        .setColor("RANDOM")
+        .addField('Latency', `${m.createdAt - new Date((ParseInt(interaction.id) / 4194304 + 1420070400000))}`)
+        .addField('API Latency', client.ws.ping)
+        .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+        .setTimestamp()
+        m.edit(embed);
     }
 });
 client.login(process.env.TOKEN);
