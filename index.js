@@ -15,9 +15,9 @@ client.on('ready', () => {
     })
 });
 client.on('message', async message => {
-    if (!(await db.findOne({_id: interaction.member.user.id}))) {
+    if (!(await db.findOne({_id: message.author.id}))) {
         await db.insertOne({
-            _id: interaction.member.user.id,
+            _id: message.author.id,
             chats: {
                 mine: 0,
                 hill: 0
@@ -38,20 +38,20 @@ client.on('message', async message => {
         });
     }
     if (message.channel.id == '796291747860840468') {
-        await db.updateOne({_id: interaction.member.user.id}, {
+        await db.updateOne({_id: message.author.id}, {
             $set: {
                 chats: {
-                    hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill,
-                    mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine + 1
+                    hill: (await db.findOne({_id: message.author.id})).chats.hill,
+                    mine: (await db.findOne({_id: message.author.id})).chats.mine + 1
                 }
             }
         });
     } else if (message.channel.id == '796293274016153640') {
-        await db.updateOne({_id: interaction.member.user.id}, {
+        await db.updateOne({_id: message.author.id}, {
             $set: {
                 chats: {
-                    hill: (await db.findOne({_id: interaction.member.user.id})).chats.hill + 1,
-                    mine: (await db.findOne({_id: interaction.member.user.id})).chats.mine
+                    hill: (await db.findOne({_id: message.author.id})).chats.hill + 1,
+                    mine: (await db.findOne({_id: message.author.id})).chats.mine
                 }
             }
         });
