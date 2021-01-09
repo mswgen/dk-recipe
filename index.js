@@ -525,7 +525,7 @@ client.on('raw', async rawData => {
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(embed);
-                message.channel.send('도<@724561925341446217>')
+                client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
         } else if (interaction.data.options[0].value == 'arrow') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.arrow < 1) {
@@ -562,7 +562,7 @@ client.on('raw', async rawData => {
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(embed);
-                message.channel.send('도<@724561925341446217>')
+                client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
         }if (interaction.data.options[0].value == 'twoHandsSword') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword < 1) {
@@ -599,7 +599,7 @@ client.on('raw', async rawData => {
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(embed);
-                message.channel.send('도<@724561925341446217>')
+                client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
         }if (interaction.data.options[0].value == 'oneHandSword') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.oneHandSword < 1) {
@@ -636,7 +636,7 @@ client.on('raw', async rawData => {
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(embed);
-                message.channel.send('도<@724561925341446217>')
+                client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
         }if (interaction.data.options[0].value == 'nickChange') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.nickChange < 1) {
@@ -673,7 +673,7 @@ client.on('raw', async rawData => {
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
                 m.edit(embed);
-                message.channel.send('도<@724561925341446217>')
+                client.channels.cache.get(interaction.channel_id).send('도<@724561925341446217>')
             }
         }
         client.channels.cache.get(interaction.channel_id).stopTyping(true);
