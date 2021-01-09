@@ -725,9 +725,17 @@ ${interaction.data.options[0].value}`;
                 .addField('Type', '```js\n' + type + '\n```')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
-            m.edit({
+            await m.edit({
                 embed: embed2
             });
+            await m.react('🗑');
+            const filter = (r, u) => r.emoji.name == '🗑' && u.id == interaction.member.user.id;
+            const collector = m.createReactionCollector(filter, {
+                max: 1
+            });
+            collector.on('end', () => {
+                m.delete();
+            })
         } catch (err) {
             const embed3 = new Discord.MessageEmbed()
                 .setTitle('Eval error...')
@@ -736,9 +744,17 @@ ${interaction.data.options[0].value}`;
                 .addField('Error', '```js\n' + err + '\n```')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
-            m.edit({
-                embed: embed3
-            });
+                await m.edit({
+                    embed: embed3
+                });
+                await m.react('🗑');
+                const filter = (r, u) => r.emoji.name == '🗑' && u.id == interaction.member.user.id;
+                const collector = m.createReactionCollector(filter, {
+                    max: 1
+                });
+                collector.on('end', () => {
+                    m.delete();
+                })
         }
     } else if (interaction.data.name == 'ping') {
         const embed = new Discord.MessageEmbed()
