@@ -708,7 +708,7 @@ ${interaction.data.options[0].value}`;
             .addField('Input', '```js\n' + interaction.data.options[0].value + '\n```')
             .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
             .setTimestamp()
-        let m = await message.channel.send(embed);
+        let m = await client.channels.cache.get(interaction.channel_id).send(embed);
         try {
             let output = eval(code);
             let type = typeof output;
