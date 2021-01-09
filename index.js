@@ -489,6 +489,188 @@ client.on('raw', async rawData => {
             }
         }
         client.channels.cache.get(interaction.channel_id).stopTyping(true);
+    } else if (interaction.data.name == 'use') {
+        if (interaction.data.options[0].value == 'oneTimeSword') {
+            if ((await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword < 1) {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('이런, 아이템이 부족해요.')
+                .setColor('RANDOM')
+                .setDescription('아이템을 조금 더 모아보세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                client.channels.cache.get(interaction.channel_id).send(embed);
+            } else {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('사용 처리 중...')
+                .setColor('RANDOM')
+                .setDescription('데이터베이스를 처리하고 있어요. 조금만 기다려주세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                let m = await client.channels.cache.get(interaction.channel_id).send(embed);
+                await db.updateOne({_id: interaction.member.user.id}, {
+                    $set: {
+                        items: {
+                            oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword - 1,
+                            arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                            twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                            oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                            nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
+                        }
+                    }
+                });
+                embed.setTitle('와우! 아이템을 사용했어요!')
+                .setColor('RANDOM')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                m.edit(`도<@724561925341446217>`, {
+                    embed: embed
+                });
+            }
+        } else if (interaction.data.options[0].value == 'arrow') {
+            if ((await db.findOne({_id: interaction.member.user.id})).items.arrow < 1) {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('이런, 아이템이 부족해요.')
+                .setColor('RANDOM')
+                .setDescription('아이템을 조금 더 모아보세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                client.channels.cache.get(interaction.channel_id).send(embed);
+            } else {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('사용 처리 중...')
+                .setColor('RANDOM')
+                .setDescription('데이터베이스를 처리하고 있어요. 조금만 기다려주세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                let m = await client.channels.cache.get(interaction.channel_id).send(embed);
+                await db.updateOne({_id: interaction.member.user.id}, {
+                    $set: {
+                        items: {
+                            oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                            arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow - 1,
+                            twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                            oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                            nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
+                        }
+                    }
+                });
+                embed.setTitle('와우! 아이템을 사용했어요!')
+                .setColor('RANDOM')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                m.edit(`도<@724561925341446217>`, {
+                    embed: embed
+                });
+            }
+        }if (interaction.data.options[0].value == 'twoHandsSword') {
+            if ((await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword < 1) {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('이런, 아이템이 부족해요.')
+                .setColor('RANDOM')
+                .setDescription('아이템을 조금 더 모아보세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                client.channels.cache.get(interaction.channel_id).send(embed);
+            } else {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('사용 처리 중...')
+                .setColor('RANDOM')
+                .setDescription('데이터베이스를 처리하고 있어요. 조금만 기다려주세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                let m = await client.channels.cache.get(interaction.channel_id).send(embed);
+                await db.updateOne({_id: interaction.member.user.id}, {
+                    $set: {
+                        items: {
+                            oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                            arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                            twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword - 1,
+                            oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                            nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
+                        }
+                    }
+                });
+                embed.setTitle('와우! 아이템을 사용했어요!')
+                .setColor('RANDOM')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                m.edit(`도<@724561925341446217>`, {
+                    embed: embed
+                });
+            }
+        }if (interaction.data.options[0].value == 'oneHandSword') {
+            if ((await db.findOne({_id: interaction.member.user.id})).items.oneHandSword < 1) {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('이런, 아이템이 부족해요.')
+                .setColor('RANDOM')
+                .setDescription('아이템을 조금 더 모아보세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                client.channels.cache.get(interaction.channel_id).send(embed);
+            } else {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('사용 처리 중...')
+                .setColor('RANDOM')
+                .setDescription('데이터베이스를 처리하고 있어요. 조금만 기다려주세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                let m = await client.channels.cache.get(interaction.channel_id).send(embed);
+                await db.updateOne({_id: interaction.member.user.id}, {
+                    $set: {
+                        items: {
+                            oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                            arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                            twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                            oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword - 1,
+                            nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange
+                        }
+                    }
+                });
+                embed.setTitle('와우! 아이템을 사용했어요!')
+                .setColor('RANDOM')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                m.edit(`도<@724561925341446217>`, {
+                    embed: embed
+                });
+            }
+        }if (interaction.data.options[0].value == 'nickChange') {
+            if ((await db.findOne({_id: interaction.member.user.id})).items.nickChange < 1) {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('이런, 아이템이 부족해요.')
+                .setColor('RANDOM')
+                .setDescription('아이템을 조금 더 모아보세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                client.channels.cache.get(interaction.channel_id).send(embed);
+            } else {
+                const embed = new Discord.MessageEmbed()
+                .setTitle('사용 처리 중...')
+                .setColor('RANDOM')
+                .setDescription('데이터베이스를 처리하고 있어요. 조금만 기다려주세요!')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                let m = await client.channels.cache.get(interaction.channel_id).send(embed);
+                await db.updateOne({_id: interaction.member.user.id}, {
+                    $set: {
+                        items: {
+                            oneTimeSword: (await db.findOne({_id: interaction.member.user.id})).items.oneTimeSword,
+                            arrow: (await db.findOne({_id: interaction.member.user.id})).items.arrow,
+                            twoHandsSword: (await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword,
+                            oneHandSword: (await db.findOne({_id: interaction.member.user.id})).items.oneHandSword,
+                            nickChange: (await db.findOne({_id: interaction.member.user.id})).items.nickChange - 1
+                        }
+                    }
+                });
+                embed.setTitle('와우! 아이템을 사용했어요!')
+                .setColor('RANDOM')
+                .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
+                .setTimestamp()
+                m.edit(`도<@724561925341446217>`, {
+                    embed: embed
+                });
+            }
+        }
     }
 });
 client.login(process.env.TOKEN);
