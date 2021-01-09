@@ -57,6 +57,7 @@ client.on('raw', async interaction => {
         type: 5
     });
     if (interaction.d.data.name == 'inventory') {
+        client.channels.cache.get(interaction.d.channel_id).startTyping(1);
         let inven = await db.findOne({_id: interaction.d.member.user.id});
         const embed = new Discord.MessageEmbed()
         .setTitle(`인벤토리 목록`)
@@ -67,6 +68,7 @@ client.on('raw', async interaction => {
         .setFooter(`${interaction.d.member.user.username}#${interaction.d.member.user.discriminator}`, interaction.d.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.d.member.user.id}/${interaction.d.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.d.member.user.discriminator % 5}.png`)
         .setTimestamp()
         client.channels.cache.get(interaction.d.channel_id).send(embed);
+        client.channels.cache.get(interaction.d.channel_id).stopTyping(true);
     }
 });
 client.login(process.env.TOKEN);
