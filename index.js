@@ -519,13 +519,13 @@ client.on('raw', async rawData => {
                     }
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
+                .addField('사용한 아이템', '일회용 칼')
                 .setColor('RANDOM')
                 .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
-                m.edit(`도<@724561925341446217>`, {
-                    embed: embed
-                });
+                m.edit(embed);
+                message.channel.send('도<@724561925341446217>')
             }
         } else if (interaction.data.options[0].value == 'arrow') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.arrow < 1) {
@@ -558,11 +558,11 @@ client.on('raw', async rawData => {
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
                 .setDescription(' ')
+                .addField('사용한 아이템', '화살 연사')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
-                m.edit(`도<@724561925341446217>`, {
-                    embed: embed
-                });
+                m.edit(embed);
+                message.channel.send('도<@724561925341446217>')
             }
         }if (interaction.data.options[0].value == 'twoHandsSword') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.twoHandsSword < 1) {
@@ -595,11 +595,11 @@ client.on('raw', async rawData => {
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
                 .setDescription(' ')
+                .addField('사용한 아이템', '전사의 양손검')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
-                m.edit(`도<@724561925341446217>`, {
-                    embed: embed
-                });
+                m.edit(embed);
+                message.channel.send('도<@724561925341446217>')
             }
         }if (interaction.data.options[0].value == 'oneHandSword') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.oneHandSword < 1) {
@@ -631,12 +631,12 @@ client.on('raw', async rawData => {
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
+                .addField('사용한 아이템', '영웅의 한손검')
                 .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
-                m.edit(`도<@724561925341446217>`, {
-                    embed: embed
-                });
+                m.edit(embed);
+                message.channel.send('도<@724561925341446217>')
             }
         }if (interaction.data.options[0].value == 'nickChange') {
             if ((await db.findOne({_id: interaction.member.user.id})).items.nickChange < 1) {
@@ -668,12 +668,12 @@ client.on('raw', async rawData => {
                 });
                 embed.setTitle('와우! 아이템을 사용했어요!')
                 .setColor('RANDOM')
+                .addField('사용한 아이템', '닉네임 변경권')
                 .setDescription(' ')
                 .setFooter(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, interaction.member.user.avatar ? `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png` : `https://cdn.discordapp.com/embed/avatars/${interaction.member.user.discriminator % 5}.png`)
                 .setTimestamp()
-                m.edit(`도<@724561925341446217>`, {
-                    embed: embed
-                });
+                m.edit(embed);
+                message.channel.send('도<@724561925341446217>')
             }
         }
         client.channels.cache.get(interaction.channel_id).stopTyping(true);
