@@ -60,6 +60,7 @@ client.on('message', async message => {
 client.on('raw', async rawData => {
     if (rawData.t != 'INTERACTION_CREATE') return;
     let interaction = rawData.d;
+    console.log(interaction);
     await axios.post(`https://discord.com/api/interactions/${interaction.id}/${interaction.token}/callback`, {
         type: 5
     });
