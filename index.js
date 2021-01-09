@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const axios = require('axios').default;
+const http = require('http');
 const dotenv = require('dotenv');
 dotenv.config();
 const MongoDB = require('mongodb');
@@ -10,6 +11,14 @@ const DBClient = new MongoDB.MongoClient(`mongodb+srv://user:${process.env.MONGO
 let db = undefined;
 client.on('ready', () => {
     console.log(`Login ${client.user.username}\n--------------------`);
+    const server = http.createServer((req, res) => {
+        res.writeHead(200);
+        res.end('hello world');
+    });
+    server.listen(8080);
+    setInterval(() => {
+        axios.get('https://dk-recipe.dkbot.repl.co').then()
+    }, 600000);
     DBClient.connect().then(() => {
         db = DBClient.db(process.env.DBNAME).collection(process.env.COLLECTION_NAME);
     })
