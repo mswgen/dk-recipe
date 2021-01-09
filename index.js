@@ -47,7 +47,7 @@ client.on('raw', async interaction => {
         type: 5
     });
     if (interaction.d.data.name == 'inventory') {
-        let inven = await db.fineOne({_id: interaction.d.member.user.id});
+        let inven = await db.findOne({_id: interaction.d.member.user.id});
         const embed = new Discord.MessageEmbed()
         .setTitle(`인벤토리 목록`)
         .setDescription(`${interaction.d.member.user.username}#${interaction.d.member.user.discriminator}님의 인벤토리 정보에요.`)
