@@ -63,7 +63,7 @@ client.on('raw', async rawData => {
     await axios.post(`https://discord.com/api/interactions/${interaction.id}/${interaction.token}/callback`, {
         type: 5
     });
-    if (interactionata.name == 'inventory') {
+    if (interaction.data.name == 'inventory') {
         client.channels.cache.get(interaction.channel_id).startTyping(1);
         let inven = await db.findOne({_id: interaction.member.user.id});
         const embed = new Discord.MessageEmbed()
@@ -77,9 +77,9 @@ client.on('raw', async rawData => {
         .setTimestamp()
         client.channels.cache.get(interaction.channel_id).send(embed);
         client.channels.cache.get(interaction.channel_id).stopTyping(true);
-    } else if (interactionata.name == 'buy') {
-        if (interactionata.options[0].name == 'material') {
-            if (interactionata.options[0].options[0].value == 'gold') {
+    } else if (interaction.data.name == 'buy') {
+        if (interaction.data.options[0].name == 'material') {
+            if (interaction.data.options[0].options[0].value == 'gold') {
                 if ((await db.findOne({_id: interaction.member.user.id})).chats.mine < 350) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 채팅 수가 부족해요.')
@@ -112,7 +112,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'iron') {
+            } else if (interaction.data.options[0].options[0].value == 'iron') {
                 if ((await db.findOne({_id: interaction.member.user.id})).chats.mine < 200) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 채팅 수가 부족해요.')
@@ -145,7 +145,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'wood') {
+            } else if (interaction.data.options[0].options[0].value == 'wood') {
                 if ((await db.findOne({_id: interaction.member.user.id})).chats.hill < 70) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 채팅 수가 부족해요.')
@@ -178,7 +178,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'thread') {
+            } else if (interaction.data.options[0].options[0].value == 'thread') {
                 if ((await db.findOne({_id: interaction.member.user.id})).chats.hill < 100) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 채팅 수가 부족해요.')
@@ -211,7 +211,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'feather') {
+            } else if (interaction.data.options[0].options[0].value == 'feather') {
                 if ((await db.findOne({_id: interaction.member.user.id})).chats.hill < 120) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 채팅 수가 부족해요.')
@@ -245,8 +245,8 @@ client.on('raw', async rawData => {
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
             }
-        } else if (interactionata.options[0].name == 'item') {
-            if (interactionata.options[0].options[0].value == 'oneTimeSword') {
+        } else if (interaction.data.options[0].name == 'item') {
+            if (interaction.data.options[0].options[0].value == 'oneTimeSword') {
                 if ((await db.findOne({_id: interaction.member.user.id})).materials.wood < 2 || (await db.findOne({_id: interaction.member.user.id})).materials.iron < 1) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 재료가 부족해요.')
@@ -282,7 +282,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'arrow') {
+            } else if (interaction.data.options[0].options[0].value == 'arrow') {
                 if ((await db.findOne({_id: interaction.member.user.id})).materials.wood < 4 || (await db.findOne({_id: interaction.member.user.id})).materials.iron < 1 || (await db.findOne({_id: interaction.member.user.id})).materials.thread < 2 || (await db.findOne({_id: interaction.member.user.id})).materials.feather < 2) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 재료가 부족해요.')
@@ -318,7 +318,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'twoHandsSword') {
+            } else if (interaction.data.options[0].options[0].value == 'twoHandsSword') {
                 if ((await db.findOne({_id: interaction.member.user.id})).materials.wood < 5 || (await db.findOne({_id: interaction.member.user.id})).materials.iron < 3) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 재료가 부족해요.')
@@ -354,7 +354,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'oneHandSword') {
+            } else if (interaction.data.options[0].options[0].value == 'oneHandSword') {
                 if ((await db.findOne({_id: interaction.member.user.id})).materials.wood < 2 || (await db.findOne({_id: interaction.member.user.id})).materials.iron < 3 || (await db.findOne({_id: interaction.member.user.id})).materials.gold < 2) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 재료가 부족해요.')
@@ -390,7 +390,7 @@ client.on('raw', async rawData => {
                     .setTimestamp()
                     client.channels.cache.get(interaction.channel_id).send(embed);
                 }
-            } else if (interactionata.options[0].options[0].value == 'nickChange') {
+            } else if (interaction.data.options[0].options[0].value == 'nickChange') {
                 if ((await db.findOne({_id: interaction.member.user.id})).materials.wood < 5) {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('이런, 재료가 부족해요.')
