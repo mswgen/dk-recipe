@@ -676,6 +676,7 @@ client.on('raw', async rawData => {
                 });
             }
         }
+        client.channels.cache.get(interaction.channel_id).stopTyping(true);
     }
 });
 client.login(process.env.TOKEN);
